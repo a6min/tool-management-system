@@ -8,6 +8,8 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
+#include "schrauberhinzufuegen.h"
+
 namespace Ui {
 class Schrauber;
 }
@@ -25,6 +27,7 @@ private slots:
 
 private:
     Ui::Schrauber *ui;
+    SchrauberHinzufuegen *schrauberHinzufuegen;
 };
 
 #endif // SCHRAUBER_H

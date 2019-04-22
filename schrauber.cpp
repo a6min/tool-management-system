@@ -76,7 +76,6 @@ Schrauber::~Schrauber()
 
 void Schrauber::on_hinzufuegen_clicked()
 {
-    QWidget *wdg = new QWidget;
-    wdg->show();
-    hide();//this will disappear main window
+    schrauberHinzufuegen = new SchrauberHinzufuegen(this);
+    schrauberHinzufuegen -> show();
 }
