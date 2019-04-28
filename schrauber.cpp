@@ -1,25 +1,15 @@
 #include "schrauber.h"
 #include "ui_schrauber.h"
 
-const QString DRIVER("QSQLITE");
 
 Schrauber::Schrauber(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Schrauber)
 {
     ui->setupUi(this);
-
-
-
-    if(QSqlDatabase::isDriverAvailable(DRIVER)) {
-        QString dbpfad = "data/schrauber.db";
-        QSqlDatabase schauberDb = QSqlDatabase::addDatabase(DRIVER);
-        schauberDb.setDatabaseName(dbpfad);
-
-        if(!schauberDb.open()){
-            qWarning() << "ERROR: " << schauberDb.lastError();
-            ui -> statusBar -> showMessage("Fehler beim Verbinden mit der Datenbank!");
-        } else {
+    DatabaseHelper *dbhelper = new DatabaseHelper();
+    if (dbhelper->verbinden())
+    {
             QSqlQuery querySchrauber("SELECT * FROM schrauber");
             if (!querySchrauber.isActive()) {
                 QSqlQuery entferneSchrauber("DROP TABLE schrauber");
@@ -61,13 +51,16 @@ Schrauber::Schrauber(QWidget *parent) :
                 qWarning() << erzeugeSchrauber.isActive();
                 ui -> statusBar -> showMessage("Die Tabelle Schrauber wurde erzeugt!");
             }
-            ui -> statusBar -> showMessage("Verbunden mit der Datenbank");
-        }
-    }
-    else {
-
+            dbhelper->trennen();
+            //ui -> statusBar -> showMessage("Verbunden mit der Datenbank");
+    } else {
+        QMessageBox::critical(
+          this,
+          tr("Fehler beim Verbinden mit der Database."),
+          tr("Bitte starten Sie die Anwendung neu!") );
     }
 }
+
 
 Schrauber::~Schrauber()
 {
@@ -78,4 +71,11 @@ void Schrauber::on_hinzufuegen_clicked()
 {
     schrauberHinzufuegen = new SchrauberHinzufuegen(this);
     schrauberHinzufuegen -> show();
+}
+
+
+void Schrauber::on_laden_clicked()
+{
+    schrauberAnzeigen = new SchrauberAnzeigen(this);
+    schrauberAnzeigen->show();
 }

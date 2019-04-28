@@ -9,6 +9,8 @@
 #include <QSqlQuery>
 
 #include "schrauberhinzufuegen.h"
+#include "databasehelper.h"
+#include "schrauberanzeigen.h"
 
 namespace Ui {
 class Schrauber;
@@ -25,9 +27,12 @@ public:
 private slots:
     void on_hinzufuegen_clicked();
 
+    void on_laden_clicked();
+
 private:
     Ui::Schrauber *ui;
     SchrauberHinzufuegen *schrauberHinzufuegen;
+    SchrauberAnzeigen *schrauberAnzeigen;
 };
 
 #endif // SCHRAUBER_H

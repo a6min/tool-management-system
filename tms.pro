@@ -27,15 +27,20 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         schrauber.cpp \
-    schrauberhinzufuegen.cpp
+    schrauberhinzufuegen.cpp \
+    databasehelper.cpp \
+    schrauberanzeigen.cpp
 
 HEADERS += \
         schrauber.h \
-    schrauberhinzufuegen.h
+    schrauberhinzufuegen.h \
+    databasehelper.h \
+    schrauberanzeigen.h
 
 FORMS += \
         schrauber.ui \
-    schrauberhinzufuegen.ui
+    schrauberhinzufuegen.ui \
+    schrauberanzeigen.ui
 
 OTHER_FILES += *.db
 

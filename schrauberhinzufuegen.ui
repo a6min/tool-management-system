@@ -6,189 +6,179 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1303</width>
-    <height>711</height>
+    <width>532</width>
+    <height>588</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Schrauber hinzufügen</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="Label_invNr">
-     <property name="text">
-      <string>Inventarnummer</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QLineEdit" name="invNr"/>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_SchraubenNr">
-     <property name="text">
-      <string>Schraubennummer</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="schraubenNr"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_MaschNr">
-     <property name="text">
-      <string>Maschinennummer</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="maschNr"/>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_AnlNr">
-     <property name="text">
-      <string>Anlagenummer</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="anlNr"/>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label_ModelNr">
-     <property name="text">
-      <string>Modellnummer</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="modelNr"/>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="label_Baugruppe">
-     <property name="text">
-      <string>Baugruppe</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLineEdit" name="baugruppe"/>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_nm">
-     <property name="text">
-      <string>nm</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QLineEdit" name="nm"/>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="label_Beschreibung">
-     <property name="text">
-      <string>Beschreibung</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="QTextEdit" name="beschreibung"/>
-   </item>
-   <item row="8" column="0">
-    <widget class="QLabel" name="label_Bezeichnung">
-     <property name="text">
-      <string>Bezeichnung</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="1">
-    <widget class="QTextEdit" name="bezeichnung"/>
-   </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="label_EinstellSZG">
-     <property name="text">
-      <string>Einstellungen SZG</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QLineEdit" name="einstellSZG"/>
-   </item>
-   <item row="10" column="0">
-    <widget class="QLabel" name="label_Klinge">
-     <property name="text">
-      <string>Klinge</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="1">
-    <widget class="QLineEdit" name="klinge"/>
-   </item>
-   <item row="11" column="0">
-    <widget class="QLabel" name="label_Schraube">
-     <property name="text">
-      <string>Schraube</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="1">
-    <widget class="QLineEdit" name="schraube"/>
-   </item>
-   <item row="12" column="0">
-    <widget class="QLabel" name="label_Bedienung">
-     <property name="text">
-      <string>Bedienungsanleitung</string>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="1">
-    <widget class="QLineEdit" name="bedienung"/>
-   </item>
-   <item row="14" column="1">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>0</y>
+     <width>491</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Neuer Schrauber</string>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="Label_invNr">
+      <property name="text">
+       <string>Inventarnummer</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="invNr"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_SchraubenNr">
+      <property name="text">
+       <string>Schraubennummer</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="schraubenNr"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_MaschNr">
+      <property name="text">
+       <string>Maschinennummer</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="maschNr"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_AnlNr">
+      <property name="text">
+       <string>Anlagenummer</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="anlNr"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_ModelNr">
+      <property name="text">
+       <string>Modellnummer</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="modelNr"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_Baugruppe">
+      <property name="text">
+       <string>Baugruppe</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="baugruppe"/>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="label_nm">
+      <property name="text">
+       <string>nm</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLineEdit" name="nm"/>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_Beschreibung">
+      <property name="text">
+       <string>Beschreibung</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QTextEdit" name="beschreibung"/>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="label_Bezeichnung">
+      <property name="text">
+       <string>Bezeichnung</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QTextEdit" name="bezeichnung"/>
+    </item>
+    <item row="9" column="0">
+     <widget class="QLabel" name="label_EinstellSZG">
+      <property name="text">
+       <string>Einstellungen SZG</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLineEdit" name="einstellSZG"/>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="label_Klinge">
+      <property name="text">
+       <string>Klinge</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QLineEdit" name="klinge"/>
+    </item>
+    <item row="11" column="0">
+     <widget class="QLabel" name="label_Schraube">
+      <property name="text">
+       <string>Schraube</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QLineEdit" name="schraube"/>
+    </item>
+    <item row="12" column="0">
+     <widget class="QLabel" name="label_Bedienung">
+      <property name="text">
+       <string>Bedienungsanleitung</string>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="1">
+     <widget class="QLineEdit" name="bedienung"/>
+    </item>
+    <item row="13" column="1">
+     <widget class="QPushButton" name="speichern">
+      <property name="text">
+       <string>Speichern</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="abbrechen">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>550</y>
+     <width>89</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Abbrechen</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>SchrauberHinzufuegen</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>SchrauberHinzufuegen</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
