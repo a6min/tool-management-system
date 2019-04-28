@@ -6,17 +6,14 @@ SchrauberAnzeigen::SchrauberAnzeigen(QWidget *parent) :
     ui(new Ui::SchrauberAnzeigen)
 {
     ui->setupUi(this);
-    DatabaseHelper dbhelper;
-    dbhelper.verbinden();
-    QSqlQueryModel *model = new QSqlQueryModel();
-    QSqlQuery *alleSchrauberHolen = new QSqlQuery();
-    alleSchrauberHolen->prepare("select * from schrauber");
-    alleSchrauberHolen->exec();
 
-    model->setQuery(*alleSchrauberHolen);
+    dbhelper.verbinden();
+    QSqlTableModel *model = new QSqlTableModel();
+    model->setTable("schrauber");
+    model->select();
     ui->schrauberTable->setModel(model);
 
-    dbhelper.trennen();
+
 }
 
 SchrauberAnzeigen::~SchrauberAnzeigen()
@@ -26,5 +23,20 @@ SchrauberAnzeigen::~SchrauberAnzeigen()
 
 void SchrauberAnzeigen::on_schliessen_clicked()
 {
+    dbhelper.trennen();
     this->close();
+}
+
+void SchrauberAnzeigen::on_schrauberTable_clicked(const QModelIndex &index)
+{
+   // QModelIndex rowIndex=ui->schrauberTable->selectionModel()->currentIndex();
+    //QVariant value=index.sibling(index.row(),"schraubernr").data();
+
+    QString foreignKeySZG = ui->schrauberTable->model()->index(index.row() , 10).data().toString();
+    QSqlTableModel *model = new QSqlTableModel();
+    model->setTable("szg");
+    model->setFilter("schraubernrz='"+ foreignKeySZG + "'");
+    model->select();
+    ui->szgTabelle->setModel(model);
+    //ui->szgTabelle->setMinimumHeight(ui->szgTabelle->horizontalHeader()->height() + ui->szgTabelle->rowHeight(0));
 }

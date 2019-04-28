@@ -26,7 +26,7 @@ void DatabaseHelper::trennen()
     schauberDb.close();
     schauberDb=QSqlDatabase();
     schauberDb.removeDatabase(connection);
-    //schauberDb.removeDatabase(QSqlDatabase::defaultConnection);
+    schauberDb.removeDatabase(QSqlDatabase::defaultConnection);
     qWarning()<<("Verbindung mit der Datenbank wurde getrennt!");
 }
 

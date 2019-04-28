@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QSqlTableModel>
+#include <QDebug>
 #include <databasehelper.h>
 
 namespace Ui {
@@ -21,8 +23,11 @@ public:
 private slots:
     void on_schliessen_clicked();
 
+    void on_schrauberTable_clicked(const QModelIndex &index);
+
 private:
     Ui::SchrauberAnzeigen *ui;
+    DatabaseHelper dbhelper;
 };
 
 #endif // SCHRAUBERANZEIGEN_H

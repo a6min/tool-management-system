@@ -23,8 +23,8 @@ void SchrauberHinzufuegen::on_speichern_clicked()
 {
     if (dbhelper->verbinden()) {
         QSqlQuery insertSchraueberQuery;
-        insertSchraueberQuery.prepare("INSERT INTO schrauber (inventarnr, schraubennr,maschnr, anlnr, modellnr, baugruppe, beschreibung, bezeichnung, einstellungenszg, klinge, schraube, pfadbedienungsanleitung) "
-                                      "VALUES (:inventarnr, :schraubennr, :maschnr, :anlnr, :modellnr, :baugruppe, :beschreibung, :bezeichnung, :einstellungenszg, :klinge, :schraube, :pfadbedienungsanleitung)");
+        insertSchraueberQuery.prepare("INSERT INTO schrauber (inventarnr, schraubennr,maschnr, anlnr, modellnr, baugruppe, beschreibung, bezeichnung, einstellungenszg, klinge, schraube, pfadbedienungsanleitung, schraubernrz) "
+                                      "VALUES (:inventarnr, :schraubennr, :maschnr, :anlnr, :modellnr, :baugruppe, :beschreibung, :bezeichnung, :einstellungenszg, :klinge, :schraube, :pfadbedienungsanleitung, :schraubernrz)");
 
         insertSchraueberQuery.bindValue(":inventarnr", ui->invNr->text());
         insertSchraueberQuery.bindValue(":schraubennr", ui->schraubenNr->text());
@@ -38,9 +38,21 @@ void SchrauberHinzufuegen::on_speichern_clicked()
         insertSchraueberQuery.bindValue(":klinge", ui->klinge->text());
         insertSchraueberQuery.bindValue(":schraube", ui->schraube->text());
         insertSchraueberQuery.bindValue(":pfadbedienungsanleitung", ui->bedienung->text());
+        insertSchraueberQuery.bindValue(":schraubernrz", ui->SZGNr->text());
 
         if(insertSchraueberQuery.exec())
         {
+            QSqlQuery insertSZGQuery;
+            insertSZGQuery.prepare("INSERT INTO szg (schraubernrz, pfadbedienungsanleitung, kommentar) VALUES (:schraubernrz, :pfadbedienungsanleitung, :kommentar)");
+            insertSZGQuery.bindValue(":schraubernrz", ui->SZGNr->text());
+            insertSZGQuery.bindValue(":pfadbedienungsanleitung", ui->bedienung_SZG->text());
+            insertSZGQuery.bindValue(":kommentar", ui->kommentarSZG->toPlainText());
+            if (!insertSZGQuery.exec()) {
+                QMessageBox::critical(
+                  this,
+                  tr("SZG zum Schrauber konnte nicht angelegt werden!"),
+                  insertSZGQuery.lastError().text());
+            }
             dbhelper->trennen();
             this->close();
         }
