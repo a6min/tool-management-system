@@ -32,11 +32,14 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_actionSchliessen_triggered();
+
 private:
     Ui::Schrauber *ui;
     SchrauberHinzufuegen *schrauberHinzufuegen;
     SchrauberAnzeigen *schrauberAnzeigen;
     PruefungDurchfuehren *pruefungDurchfueren;
+    DatabaseHelper dbhelper;
 };
 
 #endif // SCHRAUBER_H

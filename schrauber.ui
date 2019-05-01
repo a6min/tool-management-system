@@ -78,6 +78,13 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuTMS">
+    <property name="title">
+     <string>TMS</string>
+    </property>
+    <addaction name="actionSchliessen"/>
+   </widget>
+   <addaction name="menuTMS"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -88,6 +95,11 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionSchliessen">
+   <property name="text">
+    <string>Schliessen</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

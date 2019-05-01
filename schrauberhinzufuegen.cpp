@@ -53,7 +53,6 @@ void SchrauberHinzufuegen::on_speichern_clicked()
                   tr("SZG zum Schrauber konnte nicht angelegt werden!"),
                   insertSZGQuery.lastError().text());
             }
-            dbhelper->trennen();
             this->close();
         }
         else
@@ -63,6 +62,7 @@ void SchrauberHinzufuegen::on_speichern_clicked()
               tr("Der Schrauber konnte nicht angelegt werden!"),
               insertSchraueberQuery.lastError().text());
         }
+        dbhelper->trennen();
     } else {
         QMessageBox::critical(
           this,

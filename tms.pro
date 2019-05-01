@@ -30,20 +30,23 @@ SOURCES += \
     schrauberhinzufuegen.cpp \
     databasehelper.cpp \
     schrauberanzeigen.cpp \
-    pruefungdurchfuehren.cpp
+    pruefungdurchfuehren.cpp \
+    schrauberszghinzufuegen.cpp
 
 HEADERS += \
         schrauber.h \
     schrauberhinzufuegen.h \
     databasehelper.h \
     schrauberanzeigen.h \
-    pruefungdurchfuehren.h
+    pruefungdurchfuehren.h \
+    schrauberszghinzufuegen.h
 
 FORMS += \
         schrauber.ui \
     schrauberhinzufuegen.ui \
     schrauberanzeigen.ui \
-    pruefungdurchfuehren.ui
+    pruefungdurchfuehren.ui \
+    schrauberszghinzufuegen.ui
 
 OTHER_FILES += *.db
 

@@ -29,14 +29,10 @@ void SchrauberAnzeigen::on_schliessen_clicked()
 
 void SchrauberAnzeigen::on_schrauberTable_clicked(const QModelIndex &index)
 {
-   // QModelIndex rowIndex=ui->schrauberTable->selectionModel()->currentIndex();
-    //QVariant value=index.sibling(index.row(),"schraubernr").data();
-
     QString foreignKeySZG = ui->schrauberTable->model()->index(index.row() , 10).data().toString();
     QSqlTableModel *model = new QSqlTableModel();
     model->setTable("szg");
     model->setFilter("schraubernrz='"+ foreignKeySZG + "'");
     model->select();
     ui->szgTabelle->setModel(model);
-    //ui->szgTabelle->setMinimumHeight(ui->szgTabelle->horizontalHeader()->height() + ui->szgTabelle->rowHeight(0));
 }

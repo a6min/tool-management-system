@@ -7,8 +7,7 @@ Schrauber::Schrauber(QWidget *parent) :
     ui(new Ui::Schrauber)
 {
     ui->setupUi(this);
-    DatabaseHelper *dbhelper = new DatabaseHelper();
-    if (dbhelper->verbinden())
+    if (dbhelper.verbinden())
     {
             QSqlQuery querySchrauber("SELECT * FROM schrauber");
             if (!querySchrauber.isActive()) {
@@ -17,7 +16,7 @@ Schrauber::Schrauber(QWidget *parent) :
                 QSqlQuery entfernePruefung("DROP TABLE pruefung");
                 QSqlQuery erzeugeSchrauber("CREATE TABLE schrauber (id INTEGER PRIMARY KEY, "
                                            "inventarnr INTEGER, "
-                                           "schraubennr TEXT, "
+                                           "schraubennr TEXT UNIQUE, "
                                            "maschnr TEXT, "
                                            "anlnr INTEGER, "
                                            "modellnr TEXT, "
@@ -25,7 +24,7 @@ Schrauber::Schrauber(QWidget *parent) :
                                            "beschreibung TEXT, "
                                            "bezeichnung TEXT, "
                                            "nm TEXT,"
-                                           "schraubernrz TEXT,"
+                                           "schraubernrz TEXT UNIQUE,"
                                            "einstellungenszg TEXT, "
                                            "klinge TEXT, "
                                            "schraube TEXT, "
@@ -36,29 +35,31 @@ Schrauber::Schrauber(QWidget *parent) :
                                            "historieiso TEXT,"
                                            "FOREIGN KEY (schraubernrz) REFERENCES szg (schraubernrz),"
                                            "FOREIGN KEY (schraubennr) REFERENCES pruefung (schraubernr))");
-                QSqlQuery erzeugeSZG("CREATE TABLE szg (schraubernrz TEXT PRIMARY KEY, "
+                QSqlQuery erzeugeSZG("CREATE TABLE szg (id INTEGER PRIMARY KEY, "
+                                     "schraubernrz TEXT, "
                                      "pfadbedienungsanleitung TEXT,"
                                      "pruefung TEXT,"
                                      "historiewartung TEXT,"
                                      "kommentar TEXT,"
                                      "kosten REAL)");
 
-                QSqlQuery erzeugePruefung("CREATE TABLE pruefung (schraubennr TEXT PRIMARY KEY, "
-                                     "datum TEXT,"
-                                     "kommentar TEXT,"
-                                     "kosten REAL)");
+                QSqlQuery erzeugePruefung("CREATE TABLE pruefung (id INTEGER PRIMARY KEY,"
+                                        "schraubennr TEXT, "
+                                        "datum TEXT,"
+                                        "kommentar TEXT,"
+                                        "kosten REAL)");
 
                 qWarning() << erzeugeSchrauber.isActive();
                 ui -> statusBar -> showMessage("Die Tabelle Schrauber wurde erzeugt!");
             }
-            dbhelper->trennen();
-            //ui -> statusBar -> showMessage("Verbunden mit der Datenbank");
+            dbhelper.trennen();
     } else {
         QMessageBox::critical(
           this,
           tr("Fehler beim Verbinden mit der Database."),
           tr("Bitte starten Sie die Anwendung neu!") );
     }
+    ui->statusBar->showMessage("Die Anwendung wurde erfolgreich gestartet");
 }
 
 
@@ -84,4 +85,9 @@ void Schrauber::on_pushButton_clicked()
 {
     pruefungDurchfueren = new PruefungDurchfuehren(this);
     pruefungDurchfueren->show();
+}
+
+void Schrauber::on_actionSchliessen_triggered()
+{
+    QApplication::quit();
 }
