@@ -11,6 +11,7 @@
 #include "schrauberhinzufuegen.h"
 #include "databasehelper.h"
 #include "schrauberanzeigen.h"
+#include "pruefungdurchfuehren.h"
 
 namespace Ui {
 class Schrauber;
@@ -29,10 +30,13 @@ private slots:
 
     void on_laden_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Schrauber *ui;
     SchrauberHinzufuegen *schrauberHinzufuegen;
     SchrauberAnzeigen *schrauberAnzeigen;
+    PruefungDurchfuehren *pruefungDurchfueren;
 };
 
 #endif // SCHRAUBER_H

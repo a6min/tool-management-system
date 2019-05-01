@@ -43,7 +43,7 @@ Schrauber::Schrauber(QWidget *parent) :
                                      "kommentar TEXT,"
                                      "kosten REAL)");
 
-                QSqlQuery erzeugePruefung("CREATE TABLE pruefung (schraubernr TEXT PRIMARY KEY, "
+                QSqlQuery erzeugePruefung("CREATE TABLE pruefung (schraubennr TEXT PRIMARY KEY, "
                                      "datum TEXT,"
                                      "kommentar TEXT,"
                                      "kosten REAL)");
@@ -78,4 +78,10 @@ void Schrauber::on_laden_clicked()
 {
     schrauberAnzeigen = new SchrauberAnzeigen(this);
     schrauberAnzeigen->show();
+}
+
+void Schrauber::on_pushButton_clicked()
+{
+    pruefungDurchfueren = new PruefungDurchfuehren(this);
+    pruefungDurchfueren->show();
 }
