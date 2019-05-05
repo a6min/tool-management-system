@@ -9,13 +9,16 @@ DatabaseHelper::DatabaseHelper()
 bool DatabaseHelper::verbinden()
 {
     bool connected = false;
-    if(QSqlDatabase::isDriverAvailable(DRIVER)) {
-        QString dbpfad = "data/schrauber.db";
-        schauberDb = QSqlDatabase::addDatabase(DRIVER);
-        schauberDb.setDatabaseName(dbpfad);
-        connected = schauberDb.open();
+    if(schauberDb.open()) {
+        connected = true;
+    } else {
+        if(QSqlDatabase::isDriverAvailable(DRIVER)) {
+            QString dbpfad = "data/schrauber.db";
+            schauberDb = QSqlDatabase::addDatabase(DRIVER);
+            schauberDb.setDatabaseName(dbpfad);
+            connected = schauberDb.open();
+        }
     }
-
     return connected;
 }
 

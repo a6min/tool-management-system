@@ -21,23 +21,24 @@ void SchrauberAnzeigen::laden()
     model->setTable("schrauber");
     model->select();
     ui->schrauberTable->setModel(model);
-    dbhelper.trennen();
+    ui->schrauberTable->setColumnHidden(0, true);
 }
 
 void SchrauberAnzeigen::on_schliessen_clicked()
 {
+    dbhelper.trennen();
     this->close();
 }
 
 void SchrauberAnzeigen::on_schrauberTable_clicked(const QModelIndex &index)
 {
-    dbhelper.verbinden();
     foreignKeySZG = ui->schrauberTable->model()->index(index.row() , 10).data().toString();
     QSqlTableModel *model = new QSqlTableModel();
     model->setTable("szg");
     model->setFilter("schraubernrz='"+ foreignKeySZG + "'");
     model->select();
     ui->szgTabelle->setModel(model);
+    ui->szgTabelle->setColumnHidden(0, true);
 
     QSqlTableModel *modelPruef = new QSqlTableModel();
     foreignKeySchraubennr = ui->schrauberTable->model()->index(index.row() , 2).data().toString();
@@ -45,8 +46,7 @@ void SchrauberAnzeigen::on_schrauberTable_clicked(const QModelIndex &index)
     modelPruef->setFilter("schraubennr='" + foreignKeySchraubennr + "'");
     modelPruef->select();
     ui->pruefTabelle->setModel(modelPruef);
-
-    dbhelper.trennen();
+    ui->pruefTabelle->setColumnHidden(0, true);
 }
 
 void SchrauberAnzeigen::on_szgHinzufuegen_clicked()
@@ -61,7 +61,5 @@ void SchrauberAnzeigen::on_pruefen_clicked()
 
 void SchrauberAnzeigen::on_neuLaden_clicked()
 {
-    ui->szgTabelle->reset();
-    ui->pruefTabelle->reset();
     laden();
 }

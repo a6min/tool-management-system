@@ -46,9 +46,10 @@ void PruefungDurchfuehren::on_speichern_clicked()
 
     if (insertPruefung.exec()) {
         QSqlQuery updateKosten;
-        updateKosten.prepare("UPDATE schrauber SET gesamtkosten=gesamtkosten+:kosten WHERE schraubennr=:schraubennr");
+        updateKosten.prepare("UPDATE schrauber SET gesamtkosten=gesamtkosten+:kosten, letzteiso = aktuelleiso, aktuelleiso = :aktuelleiso WHERE schraubennr=:schraubennr");
         updateKosten.bindValue(":kosten", ui->kosten->text().toDouble());
         updateKosten.bindValue(":schraubennr", ui->schrauberComboBox->currentText());
+        updateKosten.bindValue(":aktuelleiso", ui->isoDatum->selectedDate().toString());
         if(!updateKosten.exec()){
             QMessageBox::critical(
               this,
