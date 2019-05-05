@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SchrauberSZGHinzufuegen</class>
- <widget name="SchrauberSZGHinzufuegen" class="QDialog">
+ <widget class="QDialog" name="SchrauberSZGHinzufuegen">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +13,84 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>361</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>SZG Hinzufügen</string>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_schrauber_waehlen">
+      <property name="text">
+       <string>Schrauber wählen</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QComboBox" name="schrauber"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="label_bedienung">
+      <property name="text">
+       <string>Bedienungsanleitung</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_kommentar">
+      <property name="text">
+       <string>Kommentar</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="bedienung"/>
+    </item>
+    <item row="3" column="1">
+     <widget class="QTextEdit" name="kommentar"/>
+    </item>
+    <item row="4" column="1">
+     <widget class="QPushButton" name="speichern">
+      <property name="text">
+       <string>Speichern</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QPushButton" name="abbrechen">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>260</y>
+     <width>89</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Abbrechen</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -16,7 +16,7 @@ class PruefungDurchfuehren : public QDialog
     Q_OBJECT
 
 public:
-    explicit PruefungDurchfuehren(QWidget *parent = nullptr);
+    explicit PruefungDurchfuehren(QWidget *parent = nullptr, QString *schraubernr = nullptr);
     ~PruefungDurchfuehren();
 
 

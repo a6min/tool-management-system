@@ -7,6 +7,7 @@
 #include <QSqlTableModel>
 #include <QDebug>
 #include <databasehelper.h>
+#include <pruefungdurchfuehren.h>
 
 namespace Ui {
 class SchrauberAnzeigen;
@@ -25,9 +26,19 @@ private slots:
 
     void on_schrauberTable_clicked(const QModelIndex &index);
 
+    void on_szgHinzufuegen_clicked();
+
+    void on_pruefen_clicked();
+
+    void on_neuLaden_clicked();
+
+    void laden();
+
 private:
     Ui::SchrauberAnzeigen *ui;
     DatabaseHelper dbhelper;
+    QString foreignKeySchraubennr;
+    QString foreignKeySZG;
 };
 
 #endif // SCHRAUBERANZEIGEN_H

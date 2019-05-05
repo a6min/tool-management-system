@@ -23,8 +23,8 @@ void SchrauberHinzufuegen::on_speichern_clicked()
 {
     if (dbhelper->verbinden()) {
         QSqlQuery insertSchraueberQuery;
-        insertSchraueberQuery.prepare("INSERT INTO schrauber (inventarnr, schraubennr,maschnr, anlnr, modellnr, baugruppe, beschreibung, bezeichnung, einstellungenszg, klinge, schraube, pfadbedienungsanleitung, schraubernrz) "
-                                      "VALUES (:inventarnr, :schraubennr, :maschnr, :anlnr, :modellnr, :baugruppe, :beschreibung, :bezeichnung, :einstellungenszg, :klinge, :schraube, :pfadbedienungsanleitung, :schraubernrz)");
+        insertSchraueberQuery.prepare("INSERT INTO schrauber (inventarnr, schraubennr,maschnr, anlnr, modellnr, baugruppe, beschreibung, bezeichnung, einstellungenszg, klinge, schraube,gesamtkosten, pfadbedienungsanleitung, schraubernrz) "
+                                      "VALUES (:inventarnr, :schraubennr, :maschnr, :anlnr, :modellnr, :baugruppe, :beschreibung, :bezeichnung, :einstellungenszg, :klinge, :schraube, :gesamtkosten, :pfadbedienungsanleitung, :schraubernrz)");
 
         insertSchraueberQuery.bindValue(":inventarnr", ui->invNr->text());
         insertSchraueberQuery.bindValue(":schraubennr", ui->schraubenNr->text());
@@ -37,6 +37,7 @@ void SchrauberHinzufuegen::on_speichern_clicked()
         insertSchraueberQuery.bindValue(":einstellungenszg", ui->einstellSZG->text());
         insertSchraueberQuery.bindValue(":klinge", ui->klinge->text());
         insertSchraueberQuery.bindValue(":schraube", ui->schraube->text());
+        insertSchraueberQuery.bindValue(":gesamtkosten", 0);
         insertSchraueberQuery.bindValue(":pfadbedienungsanleitung", ui->bedienung->text());
         insertSchraueberQuery.bindValue(":schraubernrz", ui->SZGNr->text());
 
