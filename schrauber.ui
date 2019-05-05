@@ -6,67 +6,133 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>970</width>
+    <height>529</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Schrauber</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="hinzufuegen">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>121</width>
-      <height>31</height>
+      <y>0</y>
+      <width>951</width>
+      <height>471</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
+    <property name="title">
+     <string>TMS</string>
     </property>
-    <property name="text">
-     <string>Hinzufügen</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="laden">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Laden</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>100</y>
-      <width>121</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>ISO Prüfung</string>
-    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_pruef">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Prüfungen</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_schrauber">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Schrauber</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QTableView" name="schrauberTabelle"/>
+     </item>
+     <item row="7" column="0">
+      <widget class="QTableView" name="szgTabelle"/>
+     </item>
+     <item row="10" column="0">
+      <widget class="QTableView" name="pruefTabelle"/>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPushButton" name="neuLaden">
+       <property name="text">
+        <string>Neu laden</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QPushButton" name="pruefen">
+       <property name="text">
+        <string>Prüfen</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>800</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="8" column="0">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>800</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_szg">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>SZG</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QPushButton" name="szgHinzufuegen">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>SZG Hinzufügen</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="hinzufuegen">
+       <property name="text">
+        <string>Hinzufügen</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -74,7 +140,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>970</width>
      <height>22</height>
     </rect>
    </property>

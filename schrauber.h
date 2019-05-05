@@ -10,8 +10,8 @@
 
 #include "schrauberhinzufuegen.h"
 #include "databasehelper.h"
-#include "schrauberanzeigen.h"
 #include "pruefungdurchfuehren.h"
+#include <schrauberszghinzufuegen.h>
 
 namespace Ui {
 class Schrauber;
@@ -24,22 +24,26 @@ class Schrauber : public QMainWindow
 public:
     explicit Schrauber(QWidget *parent = nullptr);
     ~Schrauber();
-
+    
 private slots:
     void on_hinzufuegen_clicked();
 
-    void on_laden_clicked();
-
-    void on_pushButton_clicked();
-
     void on_actionSchliessen_triggered();
+
+    void on_szgHinzufuegen_clicked();
+
+    void on_pruefen_clicked();
+
+    void on_schrauberTabelle_clicked(const QModelIndex &index);
+
+    void on_neuLaden_clicked();
 
 private:
     Ui::Schrauber *ui;
-    SchrauberHinzufuegen *schrauberHinzufuegen;
-    SchrauberAnzeigen *schrauberAnzeigen;
-    PruefungDurchfuehren *pruefungDurchfueren;
-    DatabaseHelper dbhelper;
+    QString foreignKeySchraubernr;
+    QString foreignKeySZG;
+    void dbTabellePruefenUndErzeugen();
+    void schrauberLaden();
 };
 
 #endif // SCHRAUBER_H

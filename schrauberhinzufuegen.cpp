@@ -6,7 +6,6 @@ SchrauberHinzufuegen::SchrauberHinzufuegen(QWidget *parent) :
     ui(new Ui::SchrauberHinzufuegen)
 {
     ui->setupUi(this);
-    dbhelper = new DatabaseHelper();
 }
 
 SchrauberHinzufuegen::~SchrauberHinzufuegen()
@@ -21,7 +20,7 @@ void SchrauberHinzufuegen::on_abbrechen_clicked()
 
 void SchrauberHinzufuegen::on_speichern_clicked()
 {
-    if (dbhelper->verbinden()) {
+    if (DatabaseHelper::getInstance().verbinden()) {
         QSqlQuery insertSchraueberQuery;
         insertSchraueberQuery.prepare("INSERT INTO schrauber (inventarnr, schraubennr,maschnr, anlnr, modellnr, baugruppe,nm, beschreibung, bezeichnung, einstellungenszg, klinge, schraube,gesamtkosten, pfadbedienungsanleitung, schraubernrz) "
                                       "VALUES (:inventarnr, :schraubennr, :maschnr, :anlnr, :modellnr, :baugruppe, :nm :beschreibung, :bezeichnung, :einstellungenszg, :klinge, :schraube, :gesamtkosten, :pfadbedienungsanleitung, :schraubernrz)");
@@ -64,7 +63,6 @@ void SchrauberHinzufuegen::on_speichern_clicked()
               tr("Der Schrauber konnte nicht angelegt werden!"),
               insertSchraueberQuery.lastError().text());
         }
-        dbhelper->trennen();
     } else {
         QMessageBox::critical(
           this,

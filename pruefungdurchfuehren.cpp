@@ -7,7 +7,6 @@ PruefungDurchfuehren::PruefungDurchfuehren(QWidget *parent, QString *schraubernr
 {
     ui->setupUi(this);
     if (schraubernr->isNull()) {
-        dbhelper.verbinden();
         QSqlQueryModel *model = new QSqlQueryModel();
         QSqlQuery query;
         query.prepare("SELECT schraubennr FROM schrauber");
@@ -16,7 +15,6 @@ PruefungDurchfuehren::PruefungDurchfuehren(QWidget *parent, QString *schraubernr
 
             ui->schrauberComboBox->setModel(model);
         }
-        dbhelper.trennen();
     } else {
         ui->schrauberComboBox->addItem(*schraubernr);
     }
@@ -35,35 +33,35 @@ void PruefungDurchfuehren::on_abbrechen_clicked()
 
 void PruefungDurchfuehren::on_speichern_clicked()
 {
-    dbhelper.verbinden();
-    dbhelper.schauberDb.transaction();
-    QSqlQuery insertPruefung;
-    insertPruefung.prepare("INSERT INTO pruefung  (schraubennr, datum, kommentar, kosten) values (:schraubennr, :datum, :kommentar, :kosten)");
-    insertPruefung.bindValue(":schraubennr", ui->schrauberComboBox->currentText());
-    insertPruefung.bindValue(":datum", ui->isoDatum->selectedDate().toString());
-    insertPruefung.bindValue(":kommentar",ui->kommentar->toPlainText());
-    insertPruefung.bindValue(":kosten", ui->kosten->text().toDouble());
+    if (DatabaseHelper::getInstance().verbinden()) {
+        DatabaseHelper::getInstance().getSchrauberDb().transaction();
+        QSqlQuery insertPruefung;
+        insertPruefung.prepare("INSERT INTO pruefung  (pruefungsnr, datum, kommentar, kosten) VALUES (:pruefungsnr, :datum, :kommentar, :kosten)");
+        insertPruefung.bindValue(":pruefungsnr", ui->schrauberComboBox->currentText());
+        insertPruefung.bindValue(":datum", ui->isoDatum->selectedDate().toString());
+        insertPruefung.bindValue(":kommentar",ui->kommentar->toPlainText());
+        insertPruefung.bindValue(":kosten", ui->kosten->text().toDouble());
 
-    if (insertPruefung.exec()) {
-        QSqlQuery updateKosten;
-        updateKosten.prepare("UPDATE schrauber SET gesamtkosten=gesamtkosten+:kosten, letzteiso = aktuelleiso, aktuelleiso = :aktuelleiso WHERE schraubennr=:schraubennr");
-        updateKosten.bindValue(":kosten", ui->kosten->text().toDouble());
-        updateKosten.bindValue(":schraubennr", ui->schrauberComboBox->currentText());
-        updateKosten.bindValue(":aktuelleiso", ui->isoDatum->selectedDate().toString());
-        if(!updateKosten.exec()){
+        if (insertPruefung.exec()) {
+            QSqlQuery updateKosten;
+            updateKosten.prepare("UPDATE schrauber SET gesamtkosten=gesamtkosten+:kosten, letzteiso = aktuelleiso, aktuelleiso = :aktuelleiso WHERE schraubernr=:schraubernr");
+            updateKosten.bindValue(":kosten", ui->kosten->text().toDouble());
+            updateKosten.bindValue(":schraubernr", ui->schrauberComboBox->currentText());
+            updateKosten.bindValue(":aktuelleiso", ui->isoDatum->selectedDate().toString());
+            if(!updateKosten.exec()){
+                QMessageBox::critical(
+                  this,
+                  tr("Fehler beim Update von Gesamtkosten"),
+                  updateKosten.lastError().text());
+                DatabaseHelper::getInstance().getSchrauberDb().rollback();
+            }
+            this->close();
+        } else {
             QMessageBox::critical(
               this,
-              tr("Fehler beim Update von Gesamtkosten"),
-              updateKosten.lastError().text());
-            dbhelper.schauberDb.rollback();
-        }
-        this->close();
-    } else {
-        QMessageBox::critical(
-          this,
-          tr("Die Daten für die Prüfung konnten nicht angelegt werden!"),
-          insertPruefung.lastError().text());
-   }
-   dbhelper.schauberDb.commit();
-   dbhelper.trennen();
+              tr("Die Daten für die Prüfung konnten nicht angelegt werden!"),
+              insertPruefung.lastError().text());
+       }
+       DatabaseHelper::getInstance().getSchrauberDb().commit();
+    }
 }

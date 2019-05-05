@@ -27,7 +27,6 @@ private slots:
 
 private:
     Ui::PruefungDurchfuehren *ui;
-    DatabaseHelper dbhelper;
 };
 
 #endif // PRUEFUNGDURCHFUEHREN_H

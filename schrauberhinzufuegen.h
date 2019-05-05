@@ -28,7 +28,6 @@ private slots:
     
 private:
     Ui::SchrauberHinzufuegen *ui;
-    DatabaseHelper *dbhelper;
 };
 
 #endif // SCHRAUBERHINZUFUEGEN_H
