@@ -2,21 +2,27 @@
 
 const QString DRIVER("QSQLITE");
 
-DatabaseHelper::DatabaseHelper()
+QSqlDatabase DatabaseHelper::getSchrauberDb() const
 {
+    return schrauberDb;
+}
+
+void DatabaseHelper::setSchrauberDb(const QSqlDatabase &value)
+{
+    schrauberDb = value;
 }
 
 bool DatabaseHelper::verbinden()
 {
     bool connected = false;
-    if(schauberDb.open()) {
+    if(schrauberDb.open()) {
         connected = true;
     } else {
         if(QSqlDatabase::isDriverAvailable(DRIVER)) {
             QString dbpfad = "data/schrauber.db";
-            schauberDb = QSqlDatabase::addDatabase(DRIVER);
-            schauberDb.setDatabaseName(dbpfad);
-            connected = schauberDb.open();
+            schrauberDb = QSqlDatabase::addDatabase(DRIVER);
+            schrauberDb.setDatabaseName(dbpfad);
+            connected = schrauberDb.open();
         }
     }
     return connected;
@@ -25,11 +31,11 @@ bool DatabaseHelper::verbinden()
 void DatabaseHelper::trennen()
 {
     QString connection;
-    connection=schauberDb.connectionName();
-    schauberDb.close();
-    schauberDb=QSqlDatabase();
-    schauberDb.removeDatabase(connection);
-    schauberDb.removeDatabase(QSqlDatabase::defaultConnection);
+    connection=schrauberDb.connectionName();
+    schrauberDb.close();
+    schrauberDb=QSqlDatabase();
+    schrauberDb.removeDatabase(connection);
+    schrauberDb.removeDatabase(QSqlDatabase::defaultConnection);
     qWarning()<<("Verbindung mit der Datenbank wurde getrennt!");
 }
 
