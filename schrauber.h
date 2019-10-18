@@ -40,6 +40,8 @@ private slots:
 
     void on_szgTabelle_clicked(const QModelIndex &index);
 
+    void on_schrauber_laden();
+
 private:
     Ui::Schrauber *ui;
     QString foreignKeyPruefung;

@@ -26,6 +26,9 @@ private slots:
     void on_speichern_clicked();
 
     void on_abbrechen_clicked();
+
+signals:
+    void schrauber_neuladen();
     
     
 private:

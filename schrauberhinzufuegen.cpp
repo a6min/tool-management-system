@@ -1,11 +1,14 @@
 #include "schrauberhinzufuegen.h"
 #include "ui_schrauberhinzufuegen.h"
+#include "schrauber.h"
 
 SchrauberHinzufuegen::SchrauberHinzufuegen(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SchrauberHinzufuegen)
 {
+    Schrauber schrauber;
     ui->setupUi(this);
+    connect(this, SIGNAL(schrauber_neuladen()), &schrauber, SLOT(on_schrauber_laden()));
 }
 
 SchrauberHinzufuegen::~SchrauberHinzufuegen()
@@ -45,6 +48,7 @@ void SchrauberHinzufuegen::on_speichern_clicked()
 
         if(insertSchraueberQuery.exec())
         {
+            emit schrauber_neuladen();
             this->close();
         }
         else
@@ -61,4 +65,3 @@ void SchrauberHinzufuegen::on_speichern_clicked()
           tr("Der Schrauber wurde nicht anglegt.") );
     }
 }
-

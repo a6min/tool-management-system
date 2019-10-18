@@ -16,7 +16,7 @@ class SchrauberSZGHinzufuegen : public QDialog
     Q_OBJECT
 
 public:
-    explicit SchrauberSZGHinzufuegen(QWidget *parent = nullptr, QString *schraubernrz = nullptr);
+    explicit SchrauberSZGHinzufuegen(QWidget *parent = nullptr, QString *szgref = nullptr);
     ~SchrauberSZGHinzufuegen();
 
 private slots:
@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::SchrauberSZGHinzufuegen *ui;
+    QString szgref;
 };
 
 #endif // SCHRAUBERSZGHINZUFUEGEN_H

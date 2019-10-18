@@ -106,16 +106,16 @@ void Schrauber::on_pruefen_clicked()
 
 void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
 {
-    foreignKeySZG = ui->schrauberTabelle->model()->index(index.row() , 10).data().toString();
+    foreignKeySZG = ui->schrauberTabelle->model()->index(index.row() , 18).data().toString();
     QSqlTableModel *model = new QSqlTableModel();
     model->setTable("szg");
-    model->setFilter("schraubernrz='"+ foreignKeySZG + "'");
+    model->setFilter("szgref='"+ foreignKeySZG + "'");
     model->select();
     ui->szgTabelle->setModel(model);
     ui->szgTabelle->setColumnHidden(0, true);
 
     QSqlTableModel *modelPruef = new QSqlTableModel();
-    foreignKeyPruefung = ui->schrauberTabelle->model()->index(index.row() , 2).data().toString();
+    foreignKeyPruefung = ui->schrauberTabelle->model()->index(index.row() , 19).data().toString();
     modelPruef->setTable("pruefung");
     modelPruef->setFilter("pruefungsnr='" + foreignKeyPruefung + "'");
     modelPruef->select();
@@ -138,4 +138,8 @@ void Schrauber::on_szgTabelle_clicked(const QModelIndex &index)
     modelPruef->select();
     ui->pruefTabelle->setModel(modelPruef);
     ui->pruefTabelle->setColumnHidden(0, true);
+}
+
+void Schrauber::on_schrauber_laden() {
+    schrauberLaden();
 }
