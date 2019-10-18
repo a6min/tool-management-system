@@ -1,23 +1,13 @@
 #include "pruefungdurchfuehren.h"
 #include "ui_pruefungdurchfuehren.h"
 
-PruefungDurchfuehren::PruefungDurchfuehren(QWidget *parent, QString *schraubernr) :
+PruefungDurchfuehren::PruefungDurchfuehren(QWidget *parent, QString *pruefref, QString *szgref) :
     QDialog(parent),
     ui(new Ui::PruefungDurchfuehren)
 {
+    this->pruefref = *pruefref;
+    this->szgref = *szgref;
     ui->setupUi(this);
-    if (schraubernr->isNull()) {
-        QSqlQueryModel *model = new QSqlQueryModel();
-        QSqlQuery query;
-        query.prepare("SELECT schraubennr FROM schrauber");
-        if (query.exec()) {
-            model->setQuery(query);
-
-            ui->schrauberComboBox->setModel(model);
-        }
-    } else {
-        ui->schrauberComboBox->addItem(*schraubernr);
-    }
 }
 
 PruefungDurchfuehren::~PruefungDurchfuehren()
@@ -36,24 +26,34 @@ void PruefungDurchfuehren::on_speichern_clicked()
     if (DatabaseHelper::getInstance().verbinden()) {
         DatabaseHelper::getInstance().getSchrauberDb().transaction();
         QSqlQuery insertPruefung;
+        QString pruefungsnr;
+        if (this->szgref.isNull() || this->szgref.isEmpty()) {
+            pruefungsnr = this->pruefref;
+        } else {
+            pruefungsnr = this->szgref;
+        }
         insertPruefung.prepare("INSERT INTO pruefung  (pruefungsnr, datum, kommentar, kosten) VALUES (:pruefungsnr, :datum, :kommentar, :kosten)");
-        insertPruefung.bindValue(":pruefungsnr", ui->schrauberComboBox->currentText());
+        insertPruefung.bindValue(":pruefungsnr", pruefungsnr);
         insertPruefung.bindValue(":datum", ui->isoDatum->selectedDate().toString());
         insertPruefung.bindValue(":kommentar",ui->kommentar->toPlainText());
         insertPruefung.bindValue(":kosten", ui->kosten->text().toDouble());
 
         if (insertPruefung.exec()) {
             QSqlQuery updateKosten;
-            updateKosten.prepare("UPDATE schrauber SET gesamtkosten=gesamtkosten+:kosten, letzteiso = aktuelleiso, aktuelleiso = :aktuelleiso WHERE schraubernr=:schraubernr");
-            updateKosten.bindValue(":kosten", ui->kosten->text().toDouble());
-            updateKosten.bindValue(":schraubernr", ui->schrauberComboBox->currentText());
-            updateKosten.bindValue(":aktuelleiso", ui->isoDatum->selectedDate().toString());
-            if(!updateKosten.exec()){
-                QMessageBox::critical(
-                  this,
-                  tr("Fehler beim Update von Gesamtkosten"),
-                  updateKosten.lastError().text());
-                DatabaseHelper::getInstance().getSchrauberDb().rollback();
+            if(this->szgref.isNull() || this->szgref.isEmpty()) {
+                updateKosten.prepare("UPDATE schrauber SET gesamtkosten=gesamtkosten+:kosten, letzteiso = aktuelleiso, aktuelleiso = :aktuelleiso WHERE pruefref=:pruefref");
+                updateKosten.bindValue(":kosten", ui->kosten->text().toDouble());
+                updateKosten.bindValue(":pruefref", this->pruefref);
+                updateKosten.bindValue(":aktuelleiso", ui->isoDatum->selectedDate().toString());
+                if(!updateKosten.exec()){
+                    QMessageBox::critical(
+                      this,
+                      tr("Fehler beim Update von Gesamtkosten"),
+                      updateKosten.lastError().text());
+                    DatabaseHelper::getInstance().getSchrauberDb().rollback();
+                }
+            } else {
+// TODO
             }
             this->close();
         } else {

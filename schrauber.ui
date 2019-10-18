@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>970</width>
-    <height>529</height>
+    <width>2101</width>
+    <height>1225</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>1920</width>
-      <height>1080</height>
+      <width>840</width>
+      <height>680</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -38,104 +38,7 @@
      <string>TMS</string>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="9" column="0">
-      <widget class="QLabel" name="label_pruef">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Prüfungen</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_schrauber">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Schrauber</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QTableView" name="schrauberTabelle">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="7" column="0">
-      <widget class="QTableView" name="szgTabelle">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QTableView" name="pruefTabelle">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QPushButton" name="neuLaden">
-       <property name="text">
-        <string>Neu laden</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1">
-      <widget class="QPushButton" name="pruefen">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string>Prüfen</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>800</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="8" column="0">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>800</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="6" column="0">
       <widget class="QLabel" name="label_szg">
        <property name="font">
         <font>
@@ -147,7 +50,41 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
+     <item row="1" column="1">
+      <widget class="QPushButton" name="hinzufuegen">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Hinzufügen</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QTableView" name="schrauberTabelle">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QTableView" name="pruefTabelle">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
       <widget class="QPushButton" name="szgHinzufuegen">
        <property name="enabled">
         <bool>false</bool>
@@ -163,16 +100,86 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="hinzufuegen">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+     <item row="8" column="0">
+      <widget class="QTableView" name="szgTabelle">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_pruef">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
        </property>
        <property name="text">
-        <string>Hinzufügen</string>
+        <string>Prüfungen</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_schrauber">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Schrauber</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="neuLaden">
+       <property name="text">
+        <string>Neu laden</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>800</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="0">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>800</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="12" column="1">
+      <widget class="QPushButton" name="pruefen">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Prüfen</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QScrollBar" name="horizontalScrollBar">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -184,7 +191,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>970</width>
+     <width>2101</width>
      <height>22</height>
     </rect>
    </property>

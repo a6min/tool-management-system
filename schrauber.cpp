@@ -65,7 +65,7 @@ Schrauber::Schrauber(QWidget *parent) :
     dbTabellePruefenUndErzeugen();
     schrauberLaden();
     ui->statusBar->showMessage("Die Anwendung wurde erfolgreich gestartet");
-    this->setWindowState(Qt::WindowFullScreen);
+    //this->setWindowState(Qt::WindowFullScreen);
 }
 
 
@@ -108,7 +108,8 @@ void Schrauber::on_szgHinzufuegen_clicked()
 
 void Schrauber::on_pruefen_clicked()
 {
-     (new PruefungDurchfuehren(this, &foreignKeyPruefung))->show();
+    QString leerenString =  QString();
+     (new PruefungDurchfuehren(this, &foreignKeyPruefung, &leerenString))->show();
 }
 
 void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
