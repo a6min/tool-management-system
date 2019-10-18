@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QSqlError>
+#include <QUuid>
+#include <QDebug>
 
 #include "databasehelper.h"
 namespace Ui {

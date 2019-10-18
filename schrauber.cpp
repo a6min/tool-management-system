@@ -21,7 +21,6 @@ void Schrauber::dbTabellePruefenUndErzeugen()
                                            "beschreibung TEXT, "
                                            "bezeichnung TEXT, "
                                            "nm TEXT,"
-                                           "schraubernrz TEXT UNIQUE,"
                                            "einstellungenszg TEXT, "
                                            "klinge TEXT, "
                                            "schraube TEXT, "
@@ -30,14 +29,16 @@ void Schrauber::dbTabellePruefenUndErzeugen()
                                            "letzteiso TEXT, "
                                            "aktuelleiso TEXT, "
                                            "historieiso TEXT,"
-                                           "FOREIGN KEY (schraubernrz) REFERENCES szg (schraubernrz),"
-                                           "FOREIGN KEY (schraubernr) REFERENCES pruefung (pruefungsnr))");
+                                           "szgref TEXT,"
+                                           "pruefref TEXT,"
+                                           "FOREIGN KEY (szgref) REFERENCES szg (szgref),"
+                                           "FOREIGN KEY (pruefref) REFERENCES pruefung (pruefungsnr))");
                 QSqlQuery erzeugeSZG("CREATE TABLE szg (id INTEGER PRIMARY KEY, "
-                                     "schraubernrz TEXT, "
+                                     "szgref TEXT, "
                                      "pfadbedienungsanleitung TEXT,"
                                      "kommentar TEXT,"
                                      "kosten REAL,"
-                                     "FOREIGN KEY (schraubernrz) REFERENCES pruefung (pruefungsnr))");
+                                     "FOREIGN KEY (szgref) REFERENCES pruefung (pruefungsnr))");
 
                 QSqlQuery erzeugePruefung("CREATE TABLE pruefung (id INTEGER PRIMARY KEY,"
                                         "pruefungsnr TEXT, "
@@ -100,7 +101,7 @@ void Schrauber::on_szgHinzufuegen_clicked()
 
 void Schrauber::on_pruefen_clicked()
 {
-     (new PruefungDurchfuehren(this, &foreignKeySchraubernr))->show();
+     (new PruefungDurchfuehren(this, &foreignKeyPruefung))->show();
 }
 
 void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
@@ -114,15 +115,27 @@ void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
     ui->szgTabelle->setColumnHidden(0, true);
 
     QSqlTableModel *modelPruef = new QSqlTableModel();
-    foreignKeySchraubernr = ui->schrauberTabelle->model()->index(index.row() , 2).data().toString();
+    foreignKeyPruefung = ui->schrauberTabelle->model()->index(index.row() , 2).data().toString();
     modelPruef->setTable("pruefung");
-    modelPruef->setFilter("pruefungsnr='" + foreignKeySchraubernr + "'");
+    modelPruef->setFilter("pruefungsnr='" + foreignKeyPruefung + "'");
     modelPruef->select();
     ui->pruefTabelle->setModel(modelPruef);
     ui->pruefTabelle->setColumnHidden(0, true);
+    ui->pruefen->setEnabled(true);
 }
 
 void Schrauber::on_neuLaden_clicked()
 {
     schrauberLaden();
+}
+
+void Schrauber::on_szgTabelle_clicked(const QModelIndex &index)
+{
+    QSqlTableModel *modelPruef = new QSqlTableModel();
+    foreignKeyPruefung = ui->schrauberTabelle->model()->index(index.row() , 2).data().toString();
+    modelPruef->setTable("pruefung");
+    modelPruef->setFilter("pruefungsnr='" + foreignKeyPruefung + "'");
+    modelPruef->select();
+    ui->pruefTabelle->setModel(modelPruef);
+    ui->pruefTabelle->setColumnHidden(0, true);
 }

@@ -46,24 +46,26 @@ void SchrauberSZGHinzufuegen::on_speichern_clicked()
     sucheSchraubernrZ.bindValue(":schraubernr", ui->schrauberComboBox->currentText());
 
     if (sucheSchraubernrZ.exec()) {
-         QString schraubernrZ = sucheSchraubernrZ.value(0).toString();
-         QSqlQuery insertSZG;
-         insertSZG.prepare("INSERT INTO szg (schraubernrz, pfadbedienungsanleitung, kommentar, kosten) VALUES (:schraubernrz, :pfadbedienungsanleitung, :kommentar, :kosten)");
-         insertSZG.bindValue(":schraubernrz", schraubernrZ);
-         insertSZG.bindValue(":pfadbedienungsanleitung", ui->bedienung->text());
-         insertSZG.bindValue(":kommentar", ui->kommentar->toPlainText());
-         insertSZG.bindValue(":kosten", 0.0);
-         if(!insertSZG.exec()){
-             QMessageBox::critical(
-               this,
-               tr("Fehler beim hinzufügen von SZG"),
-               insertSZG.lastError().text());
-         }
-         this->close();
+        sucheSchraubernrZ.first();
+        QString schraubernrZ = sucheSchraubernrZ.value(0).toString();
+
+        QSqlQuery insertSZG;
+        insertSZG.prepare("INSERT INTO szg (schraubernrz, pfadbedienungsanleitung, kommentar, kosten) VALUES (:schraubernrz, :pfadbedienungsanleitung, :kommentar, :kosten)");
+        insertSZG.bindValue(":schraubernrz", schraubernrZ);
+        insertSZG.bindValue(":pfadbedienungsanleitung", ui->bedienung->text());
+        insertSZG.bindValue(":kommentar", ui->kommentar->toPlainText());
+        insertSZG.bindValue(":kosten", 0.0);
+        if(!insertSZG.exec()){
+            QMessageBox::critical(
+                        this,
+                        tr("Fehler beim hinzufügen von SZG"),
+                        insertSZG.lastError().text());
+        }
+        this->close();
     } else {
         QMessageBox::critical(
-          this,
-          tr("Fehler beim Suchen von Schraubernummer für SZG"),
-          sucheSchraubernrZ.lastError().text());
+                    this,
+                    tr("Fehler beim Suchen von Schraubernummer für SZG"),
+                    sucheSchraubernrZ.lastError().text());
     }
 }

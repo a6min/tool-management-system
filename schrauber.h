@@ -38,9 +38,11 @@ private slots:
 
     void on_neuLaden_clicked();
 
+    void on_szgTabelle_clicked(const QModelIndex &index);
+
 private:
     Ui::Schrauber *ui;
-    QString foreignKeySchraubernr;
+    QString foreignKeyPruefung;
     QString foreignKeySZG;
     void dbTabellePruefenUndErzeugen();
     void schrauberLaden();

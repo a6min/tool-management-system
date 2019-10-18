@@ -22,11 +22,12 @@ void SchrauberHinzufuegen::on_speichern_clicked()
 {
     if (DatabaseHelper::getInstance().verbinden()) {
         QSqlQuery insertSchraueberQuery;
-        insertSchraueberQuery.prepare("INSERT INTO schrauber (inventarnr, schraubennr,maschnr, anlnr, modellnr, baugruppe,nm, beschreibung, bezeichnung, einstellungenszg, klinge, schraube,gesamtkosten, pfadbedienungsanleitung, schraubernrz) "
-                                      "VALUES (:inventarnr, :schraubennr, :maschnr, :anlnr, :modellnr, :baugruppe, :nm :beschreibung, :bezeichnung, :einstellungenszg, :klinge, :schraube, :gesamtkosten, :pfadbedienungsanleitung, :schraubernrz)");
+        insertSchraueberQuery.prepare("INSERT INTO schrauber (inventarnr, schraubernr,maschnr, anlnr, modellnr, baugruppe,nm, beschreibung, bezeichnung, einstellungenszg, klinge, schraube,gesamtkosten, pfadbedienungsanleitung, szgref, pruefref) "
+                                      "VALUES (:inventarnr, :schraubernr, :maschnr, :anlnr, :modellnr, :baugruppe, :nm, :beschreibung, :bezeichnung, :einstellungenszg, :klinge, :schraube, :gesamtkosten, :pfadbedienungsanleitung, :szgref, :pruefref)");
+
 
         insertSchraueberQuery.bindValue(":inventarnr", ui->invNr->text());
-        insertSchraueberQuery.bindValue(":schraubennr", ui->schraubenNr->text());
+        insertSchraueberQuery.bindValue(":schraubernr", ui->schrauberNr->text());
         insertSchraueberQuery.bindValue(":maschnr", ui->maschNr->text());
         insertSchraueberQuery.bindValue(":anlnr", ui->anlNr->text().toInt());
         insertSchraueberQuery.bindValue(":modellnr", ui->modelNr->text());
@@ -39,21 +40,11 @@ void SchrauberHinzufuegen::on_speichern_clicked()
         insertSchraueberQuery.bindValue(":schraube", ui->schraube->text());
         insertSchraueberQuery.bindValue(":gesamtkosten", 0);
         insertSchraueberQuery.bindValue(":pfadbedienungsanleitung", ui->bedienung->text());
-        insertSchraueberQuery.bindValue(":schraubernrz", ui->SZGNr->text());
+        insertSchraueberQuery.bindValue(":szgref", QUuid::createUuid().toString());
+        insertSchraueberQuery.bindValue(":pruefref",QUuid::createUuid().toString());
 
         if(insertSchraueberQuery.exec())
         {
-            QSqlQuery insertSZGQuery;
-            insertSZGQuery.prepare("INSERT INTO szg (schraubernrz, pfadbedienungsanleitung, kommentar) VALUES (:schraubernrz, :pfadbedienungsanleitung, :kommentar)");
-            insertSZGQuery.bindValue(":schraubernrz", ui->SZGNr->text());
-            insertSZGQuery.bindValue(":pfadbedienungsanleitung", ui->bedienung_SZG->text());
-            insertSZGQuery.bindValue(":kommentar", ui->kommentarSZG->toPlainText());
-            if (!insertSZGQuery.exec()) {
-                QMessageBox::critical(
-                  this,
-                  tr("SZG zum Schrauber konnte nicht angelegt werden!"),
-                  insertSZGQuery.lastError().text());
-            }
             this->close();
         }
         else

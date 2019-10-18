@@ -29,7 +29,7 @@
     <item row="0" column="0">
      <widget class="QLabel" name="label_SchrauberWaehlen">
       <property name="text">
-       <string>Schrauber wählen</string>
+       <string>Schrauber/SZG zu prüfen</string>
       </property>
      </widget>
     </item>

@@ -5,6 +5,7 @@
 #include <QSqlQueryModel>
 #include <QSqlQuery>
 #include <QMessageBox>
+#include <QDebug>
 #include <databasehelper.h>
 namespace Ui {
 class SchrauberSZGHinzufuegen;

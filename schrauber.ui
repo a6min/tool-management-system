@@ -52,7 +52,13 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QTableView" name="schrauberTabelle"/>
+      <widget class="QTableView" name="schrauberTabelle">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item row="7" column="0">
       <widget class="QTableView" name="szgTabelle"/>
@@ -69,6 +75,9 @@
      </item>
      <item row="10" column="1">
       <widget class="QPushButton" name="pruefen">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Prüfen</string>
        </property>
