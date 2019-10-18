@@ -85,6 +85,9 @@ void Schrauber::schrauberLaden()
     ui->schrauberTabelle->setStyleSheet("alternate-background-color: grey;background-color: white;");
     ui->schrauberTabelle->setModel(model);
     ui->schrauberTabelle->setColumnHidden(0, true);
+    ui->schrauberTabelle->setColumnHidden(18,true);
+    ui->schrauberTabelle->setColumnHidden(19,true);
+    ui->schrauberTabelle->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
 void Schrauber::on_hinzufuegen_clicked()
@@ -119,6 +122,7 @@ void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
     ui->szgTabelle->setColumnHidden(0, true);
     ui->szgTabelle->setAlternatingRowColors(true);
     ui->szgTabelle->setStyleSheet("alternate-background-color: grey;background-color: white;");
+    ui->szgTabelle->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
     QSqlTableModel *modelPruef = new QSqlTableModel();
     foreignKeyPruefung = ui->schrauberTabelle->model()->index(index.row() , 19).data().toString();
@@ -128,6 +132,7 @@ void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
     ui->pruefTabelle->setModel(modelPruef);
     ui->pruefTabelle->setColumnHidden(0, true);
     ui->pruefen->setEnabled(true);
+    ui->szgHinzufuegen->setEnabled(true);
 }
 
 void Schrauber::on_neuLaden_clicked()
@@ -146,6 +151,7 @@ void Schrauber::on_szgTabelle_clicked(const QModelIndex &index)
     ui->pruefTabelle->setColumnHidden(0, true);
     ui->pruefTabelle->setAlternatingRowColors(true);
     ui->pruefTabelle->setStyleSheet("alternate-background-color: grey;background-color: white;");
+    ui->pruefTabelle->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
 }
 
