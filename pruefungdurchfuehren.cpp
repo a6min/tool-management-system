@@ -53,9 +53,30 @@ void PruefungDurchfuehren::on_speichern_clicked()
                     DatabaseHelper::getInstance().getSchrauberDb().rollback();
                 }
             } else {
-// TODO
+                double kosten = ui->kosten->text().toDouble();
+                updateKosten.prepare("UPDATE szg SET kosten=kosten+:kosten WHERE szgref=:szgref");
+                updateKosten.bindValue(":kosten", kosten);
+                updateKosten.bindValue(":szgref", this->szgref);
+                if(updateKosten.exec()){
+                    QSqlQuery updateSchrauber;
+                    updateSchrauber.prepare("UPDATE schrauber SET gesamtkosten=gesamtkosten+:kosten WHERE szgref=:szgref");
+                    updateSchrauber.bindValue(":kosten", kosten);
+                    updateSchrauber.bindValue(":szgref", this->szgref);
+                    if(!updateSchrauber.exec()){
+                        QMessageBox::critical(
+                          this,
+                          tr("Fehler beim Update von Gesamtkosten am Schrauber"),
+                          updateKosten.lastError().text());
+                        DatabaseHelper::getInstance().getSchrauberDb().rollback();
+                    }
+                }else {
+                    QMessageBox::critical(
+                      this,
+                      tr("Fehler beim Update von Gesamtkosten"),
+                      updateKosten.lastError().text());
+                    DatabaseHelper::getInstance().getSchrauberDb().rollback();
+                }
             }
-            this->close();
         } else {
             QMessageBox::critical(
               this,
@@ -63,5 +84,6 @@ void PruefungDurchfuehren::on_speichern_clicked()
               insertPruefung.lastError().text());
        }
        DatabaseHelper::getInstance().getSchrauberDb().commit();
+       this->close();
     }
 }

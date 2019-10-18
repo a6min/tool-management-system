@@ -65,7 +65,7 @@ Schrauber::Schrauber(QWidget *parent) :
     dbTabellePruefenUndErzeugen();
     schrauberLaden();
     ui->statusBar->showMessage("Die Anwendung wurde erfolgreich gestartet");
-    //this->setWindowState(Qt::WindowFullScreen);
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
 
@@ -109,7 +109,13 @@ void Schrauber::on_szgHinzufuegen_clicked()
 void Schrauber::on_pruefen_clicked()
 {
     QString leerenString =  QString();
-     (new PruefungDurchfuehren(this, &foreignKeyPruefung, &leerenString))->show();
+
+    if (foreignKeyPruefungSZG.isNull() && foreignKeyPruefungSZG.isEmpty()) {
+        (new PruefungDurchfuehren(this, &foreignKeyPruefung, &leerenString))->show();
+    } else {
+        (new PruefungDurchfuehren(this, &leerenString, &foreignKeyPruefungSZG))->show();
+    }
+
 }
 
 void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
@@ -144,9 +150,9 @@ void Schrauber::on_neuLaden_clicked()
 void Schrauber::on_szgTabelle_clicked(const QModelIndex &index)
 {
     QSqlTableModel *modelPruef = new QSqlTableModel();
-    foreignKeyPruefung = ui->schrauberTabelle->model()->index(index.row() , 2).data().toString();
+    foreignKeyPruefungSZG = ui->szgTabelle->model()->index(index.row() , 1).data().toString();
     modelPruef->setTable("pruefung");
-    modelPruef->setFilter("pruefungsnr='" + foreignKeyPruefung + "'");
+    modelPruef->setFilter("pruefungsnr='" + foreignKeyPruefungSZG + "'");
     modelPruef->select();
     ui->pruefTabelle->setModel(modelPruef);
     ui->pruefTabelle->setColumnHidden(0, true);

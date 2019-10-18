@@ -46,6 +46,7 @@ private:
     Ui::Schrauber *ui;
     QString foreignKeyPruefung;
     QString foreignKeySZG;
+    QString foreignKeyPruefungSZG;
     void dbTabellePruefenUndErzeugen();
     void schrauberLaden();
 };
