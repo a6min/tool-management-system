@@ -65,6 +65,7 @@ Schrauber::Schrauber(QWidget *parent) :
     dbTabellePruefenUndErzeugen();
     schrauberLaden();
     ui->statusBar->showMessage("Die Anwendung wurde erfolgreich gestartet");
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
 
@@ -79,6 +80,9 @@ void Schrauber::schrauberLaden()
     QSqlTableModel *model = new QSqlTableModel();
     model->setTable("schrauber");
     model->select();
+
+    ui->schrauberTabelle->setAlternatingRowColors(true);
+    ui->schrauberTabelle->setStyleSheet("alternate-background-color: grey;background-color: white;");
     ui->schrauberTabelle->setModel(model);
     ui->schrauberTabelle->setColumnHidden(0, true);
 }
@@ -113,6 +117,8 @@ void Schrauber::on_schrauberTabelle_clicked(const QModelIndex &index)
     model->select();
     ui->szgTabelle->setModel(model);
     ui->szgTabelle->setColumnHidden(0, true);
+    ui->szgTabelle->setAlternatingRowColors(true);
+    ui->szgTabelle->setStyleSheet("alternate-background-color: grey;background-color: white;");
 
     QSqlTableModel *modelPruef = new QSqlTableModel();
     foreignKeyPruefung = ui->schrauberTabelle->model()->index(index.row() , 19).data().toString();
@@ -138,6 +144,9 @@ void Schrauber::on_szgTabelle_clicked(const QModelIndex &index)
     modelPruef->select();
     ui->pruefTabelle->setModel(modelPruef);
     ui->pruefTabelle->setColumnHidden(0, true);
+    ui->pruefTabelle->setAlternatingRowColors(true);
+    ui->pruefTabelle->setStyleSheet("alternate-background-color: grey;background-color: white;");
+
 }
 
 void Schrauber::on_schrauber_laden() {
